@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nick's BBQ | Slow Smoked, Made Fresh</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #080808;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a, button { color: inherit; font-family: inherit; }
+    button { border: none; cursor: pointer; }
+
+    .page {
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.92), rgba(0,0,0,0.62), rgba(0,0,0,0.28)),
+        url('https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 7%;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c24616, #ffb347);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111;
+      font-weight: 900;
+      font-size: 16px;
+      box-shadow: 0 6px 20px rgba(255,115,35,0.45);
+      flex-shrink: 0;
+    }
+
+    .logo span { color: #ff9f45; }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      font-size: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links button {
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      background: rgba(0,0,0,0.3);
+      color: #fff;
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active {
+      background: #ff7a22;
+      color: #111;
+      border-color: #ff7a22;
+      font-weight: 900;
+    }
+
+    .view { display: none; flex: 1; }
+    .view.active { display: grid; }
+
+    .home-view {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero { max-width: 700px; }
+
+    .hero-brand {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .eyebrow {
+      color: #ffbf7c;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: 0.92;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: clamp(18px, 2vw, 23px);
+      max-width: 590px;
+      color: #eee;
+      margin-bottom: 26px;
+    }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 900;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn-primary { background: #ff7a22; color: #111; }
+    .btn-secondary { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.45); color: #fff; }
+
+    .panel, .content-panel {
+      background: rgba(10,10,10,0.78);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 28px;
+      padding: 26px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.48);
+    }
+
+    .panel h2, .content-panel h2 { font-size: 28px; margin-bottom: 16px; }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .quick-card, .menu-card, .gallery-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .quick-card strong, .menu-card strong {
+      display: block;
+      color: #ffbf7c;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .quick-card span, .menu-card span { color: #ddd; font-size: 14px; }
+
+    .mini-menu { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 18px; margin-top: 10px; }
+    .mini-menu h3 { margin-bottom: 10px; color: #fff; }
+
+    .menu-list { display: grid; gap: 8px; font-size: 14px; color: #ddd; }
+    .menu-list div { display: flex; justify-content: space-between; gap: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .menu-list b { color: #fff; }
+
+    .content-view {
+      align-items: center;
+      max-width: 1150px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .content-header h1 {
+      font-size: clamp(42px, 5vw, 70px);
+      margin-bottom: 8px;
+    }
+
+    .content-header p { color: #ddd; max-width: 650px; }
+
+    .back-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .menu-card em {
+      display: block;
+      color: #bbb;
+      font-style: normal;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .price {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,122,34,0.18);
+      border: 1px solid rgba(255,122,34,0.35);
+      color: #ffbf7c;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .service-box {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .service-box h3 {
+      color: #ffbf7c;
+      margin-bottom: 10px;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .service-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 13px;
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    .service-item strong {
+      color: #ffbf7c;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      grid-template-rows: 190px 190px;
+      gap: 14px;
+    }
+
+    .gallery-card {
+      padding: 0;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      min-height: 170px;
+      position: relative;
+    }
+
+    .gallery-card.large { grid-row: span 2; background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop'); }
+    .g2 { background-image: url('https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=2070&auto=format&fit=crop'); }
+    .g3 { background-image: url('https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=2031&auto=format&fit=crop'); }
+    .g4 { background-image: url('https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?q=80&w=2070&auto=format&fit=crop'); }
+    .g5 { background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2087&auto=format&fit=crop'); }
+
+    .gallery-label {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      background: rgba(0,0,0,0.68);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #ffbf7c;
+      font-weight: 900;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .book-info {
+      background: rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .book-info h3 { color: #ffbf7c; margin-bottom: 12px; }
+    .book-info p, .book-info li { color: #ddd; font-size: 15px; }
+    .book-info ul { padding-left: 18px; display: grid; gap: 8px; margin-top: 12px; }
+
+    .payment-box {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .payment-options {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .pay-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .pay-link span {
+      color: #ffbf7c;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .qr-card {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      border-radius: 18px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .qr-card img {
+      width: 145px;
+      height: 145px;
+      display: block;
+      margin: 8px auto;
+      border-radius: 10px;
+    }
+
+    .security-note {
+      margin-top: 12px;
+      color: #bbb;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.95);
+      color: #111;
+      font-size: 15px;
+    }
+
+    textarea { grid-column: span 2; min-height: 110px; resize: vertical; }
+    form .btn { grid-column: span 2; text-align: center; }
+
+    .footer-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      color: #cfcfcf;
+      font-size: 13px;
+      padding-top: 22px;
+    }
+
+    .badge {
+      background: rgba(255,122,34,0.16);
+      color: #ffbf7c;
+      border: 1px solid rgba(255,122,34,0.35);
+      padding: 8px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      body { overflow-y: auto; }
+      .page { min-height: auto; padding: 20px; background-attachment: scroll; }
+      nav { align-items: flex-start; gap: 16px; flex-direction: column; }
+      .nav-links { justify-content: flex-start; }
+      .home-view, .book-grid { grid-template-columns: 1fr; }
+      .quick-grid, .menu-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-card.large { grid-row: auto; }
+      h1 { font-size: 50px; }
+      .content-header { flex-direction: column; }
+      form { grid-template-columns: 1fr; }
+      textarea, form .btn { grid-column: span 1; }
+      .footer-note { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav>
+      <div class="logo">
+        <div class="logo-mark">NBQ</div>
+        <div>Nick's <span>BBQ</span></div>
+      </div>
+      <div class="nav-links">
+        <button class="active" onclick="showView('home', this)">Home</button>
+        <button onclick="showView('menu', this)">Menu</button>
+        <button onclick="showView('gallery', this)">Gallery</button>
+        <button onclick="showView('book', this)">Book</button>
+      </div>
+    </nav>
+
+    <main id="home" class="view home-view active">
+      <section class="hero">
+        <div class="hero-brand">
+          <div class="logo-mark" style="width:50px;height:50px;font-size:17px;">NBQ</div>
+          <div style="font-weight:700; letter-spacing:2px; font-size:14px; color:#ffbf7c;">NICK'S BBQ</div>
+        </div>
+        <div class="eyebrow">Slow smoked • Small gatherings • Big flavor</div>
+        <h1>Real BBQ, served fresh.</h1>
+        <p>Private BBQ trays, family meals, and small event catering with smoked meats, classic sides, and relaxed backyard energy.</p>
+        <div class="buttons">
+          <button class="btn btn-primary" onclick="showViewByName('book')">Book BBQ Catering</button>
+          <button class="btn btn-secondary" onclick="showViewByName('menu')">View BBQ Menu</button>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h2>BBQ made simple.</h2>
+        <div class="quick-grid">
+          <div class="quick-card"><strong>Smoked meats</strong><span>Brisket, pulled pork, ribs, chicken.</span></div>
+          <div class="quick-card"><strong>Family trays</strong><span>Easy pickup or local delivery.</span></div>
+          <div class="quick-card"><strong>Small events</strong><span>Backyards, birthdays, church groups.</span></div>
+          <div class="quick-card"><strong>Mon–Thu delivery</strong><span>Local delivery option in 30519.</span></div>
+        </div>
+        <div class="mini-menu">
+          <h3>Popular choices</h3>
+          <div class="menu-list">
+            <div><b>Pulled Pork Tray</b><span>from $45</span></div>
+            <div><b>Brisket Plate</b><span>from $22</span></div>
+            <div><b>Rib Rack</b><span>from $32</span></div>
+            <div><b>Family BBQ Pack</b><span>from $85</span></div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <main id="menu" class="view content-view">
+      <section class="content-panel">
+        <div class="content-header">
+          <div>
+            <div class="eyebrow">Sample menu</div>
+            <h1>Choose your BBQ spread.</h1>
+            <p>Suggested starter prices for a mockup menu. Final pricing can adjust based on portions, meat cost, delivery, and event setup.</p>
+          </div>
+          <button class="back-btn" onclick="showViewByName('home')">← Back Home</button>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-card"><strong>Pulled Pork Tray</strong><span>Slow-smoked pork, house BBQ sauce, buns optional.</span><em>Great for groups and casual meals.</em><div class="price">Suggested: from $45</div></div>
+          <div class="menu-card"><strong>Brisket Plate</strong><span>Sliced brisket, pickles, onions, sauce, and one side.</span><em>Premium BBQ favorite.</em><div class="price">Suggested: $22</div></div>
+          <div class="menu-card"><strong>Baby Back Ribs</strong><span>Smoked ribs with a sticky glaze or dry rub finish.</span><em>Perfect centerpiece item.</em><div class="price">Suggested: from $32</div></div>
+          <div class="menu-card"><strong>Smoked Chicken</strong><span>Juicy smoked chicken with house seasoning and sauce.</span><em>Simple, family-friendly option.</em><div class="price">Suggested: $16</div></div>
+          <div class="menu-card"><strong>Family BBQ Pack</strong><span>Meat, buns, two sides, sauce, pickles, and serving setup.</span><em>Designed to feed 4–6 people.</em><div class="price">Suggested: from $85</div></div>
+          <div class="menu-card"><strong>Classic Sides</strong><span>Mac and cheese, slaw, beans, potato salad, cornbread.</span><em>Add sides to any order.</em><div class="price">Suggested: from $12</div></div>
+        </div>
+        <div class="service-box">
+          <h3>Delivery and event options</h3>
+          <div class="service-list">
+            <div class="service-item"><strong>Monday–Thursday local delivery</strong>Available in ZIP code 30519 for smaller BBQ orders when the schedule allows.</div>
+            <div class="service-item"><strong>Suggested delivery fee</strong>$10 within 30519, or free delivery for orders over $150.</div>
+            <div class="service-item"><strong>Small event catering</strong>Suggested $300 minimum for private BBQ service, with final quote based on menu and guest count.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <main id="gallery" class="view content-view">
+      <section class="content-panel">
+        <div class="content-header">
+          <div>
+            <div class="eyebrow">Gallery</div>
+            <h1>Smoke, sauce, and backyard comfort.</h1>
+            <p>A visual feel for the kind of BBQ experience Nick's BBQ can bring to family meals and small gatherings.</p>
+          </div>
+          <button class="back-btn" onclick="showViewByName('home')">← Back Home</button>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-card large"><div class="gallery-label">Smoked ribs</div></div>
+          <div class="gallery-card g2"><div class="gallery-label">BBQ platter</div></div>
+          <div class="gallery-card g3"><div class="gallery-label">Brisket slices</div></div>
+          <div class="gallery-card g4"><div class="gallery-label">Family trays</div></div>
+          <div class="gallery-card g5"><div class="gallery-label">Sauce & sides</div></div>
+        </div>
+      </section>
+    </main>
+
+    <main id="book" class="view content-view">
+      <section class="content-panel">
+        <div class="content-header">
+          <div>
+            <div class="eyebrow">Booking request</div>
+            <h1>Start your BBQ order.</h1>
+            <p>Use this as a mock booking/order request. Right now it shows a confirmation message; later it can connect to email or a payment provider.</p>
+          </div>
+          <button class="back-btn" onclick="showViewByName('home')">← Back Home</button>
+        </div>
+        <div class="book-grid">
+          <div class="book-info">
+            <h3>Good for:</h3>
+            <p>Small gatherings where people want real BBQ without cooking all day.</p>
+            <ul>
+              <li>Family dinners and backyard nights</li>
+              <li>Birthdays and small events</li>
+              <li>Church, homeschool, or team meals</li>
+              <li>Suggested plates: $16–$22 each</li>
+              <li>Family packs from $85</li>
+              <li>Monday–Thursday delivery available in 30519</li>
+            </ul>
+
+            <div class="service-box">
+              <h3>Suggested pricing</h3>
+              <div class="service-list">
+                <div class="service-item"><strong>Individual plates</strong>$16–$22 each depending on meat and sides.</div>
+                <div class="service-item"><strong>Family packs</strong>Starting around $85 for meat, sides, sauce, and buns.</div>
+                <div class="service-item"><strong>Small delivery orders</strong>Monday–Thursday in ZIP 30519. Suggested $10 delivery fee, or free over $150.</div>
+                <div class="service-item"><strong>Private BBQ catering</strong>Suggested $300 minimum, final quote based on guest count and menu.</div>
+              </div>
+            </div>
+
+            <div class="payment-box">
+              <h3>Secure payment options</h3>
+              <p>Reserve your date with a deposit or pay your order balance through a trusted provider.</p>
+
+              <div class="payment-options">
+                <a class="pay-link" href="https://buy.stripe.com/test_123456789" target="_blank">Pay deposit with Stripe <span>Secure checkout →</span></a>
+                <a class="pay-link" href="https://square.link/u/example" target="_blank">Pay with Square <span>Card / Apple Pay →</span></a>
+                <a class="pay-link" href="https://www.paypal.me/yourname" target="_blank">Pay with PayPal <span>PayPal / card →</span></a>
+              </div>
+
+              <div class="qr-card">
+                <strong>Scan to order or book</strong>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://yourusername.github.io/nicks-bbq/" alt="QR code for Nick's BBQ website">
+                <small>Replace this QR link with your real GitHub Pages or payment link.</small>
+              </div>
+
+              <p class="security-note">For safety, this site should not collect credit card numbers directly. Use Stripe, Square, PayPal, or another trusted payment processor.</p>
+            </div>
+          </div>
+
+          <form onsubmit="alert('Thanks! This is a mockup form. Next step: connect it to your email.'); return false;">
+            <input type="text" placeholder="Your name" required>
+            <input type="email" placeholder="Email address" required>
+            <input type="tel" placeholder="Phone number">
+            <input type="date" required>
+            <select>
+              <option>Estimated guests</option>
+              <option>Family order: 4–6 people</option>
+              <option>Small group: 10–15 people</option>
+              <option>Event: 16–30 people</option>
+              <option>Larger event / custom quote</option>
+            </select>
+            <select>
+              <option>Order type</option>
+              <option>Monday–Thursday delivery in 30519</option>
+              <option>Pickup order</option>
+              <option>Family BBQ pack</option>
+              <option>Small event catering</option>
+              <option>Custom quote</option>
+            </select>
+            <textarea placeholder="Tell us about your event, preferred meats, sides, location, and serving time..."></textarea>
+            <button class="btn btn-primary" type="submit">Send BBQ Request</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer-note">
+      <span>© 2026 Nick's BBQ • Slow smoked, made fresh.</span>
+      <span class="badge">One-file mockup • Home, Menu, Gallery, and Book inside this page</span>
+    </div>
+  </div>
+
+  <script>
+    function showView(name, button) {
+      document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+      document.getElementById(name).classList.add('active');
+      document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
+      if (button) button.classList.add('active');
+    }
+
+    function showViewByName(name) {
+      const buttons = document.querySelectorAll('.nav-links button');
+      const labels = ['home', 'menu', 'gallery', 'book'];
+      const index = labels.indexOf(name);
+      showView(name, buttons[index]);
+    }
+  </script>
+</body>
+</html>
