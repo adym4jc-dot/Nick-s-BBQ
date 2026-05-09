@@ -239,13 +239,47 @@
       font-size: 13px;
     }
 
-    .service-box, .order-ahead-box {
+    .service-box, .order-ahead-box, .faq-box, .contact-box {
       margin-top: 18px;
       padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,0.14);
     }
 
-    .service-box h3, .order-ahead-box h3 { color: #ffbf7c; margin-bottom: 10px; }
+    .service-box h3, .order-ahead-box h3, .faq-box h3, .contact-box h3 { color: #ffbf7c; margin-bottom: 10px; }
+
+    .contact-grid, .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .contact-card, .faq-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 14px;
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    .contact-card strong, .faq-card strong {
+      color: #ffbf7c;
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .limited-note {
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 16px;
+      background: rgba(255,122,34,0.14);
+      border: 1px solid rgba(255,122,34,0.3);
+      color: #ffdfbd;
+      font-size: 14px;
+      font-weight: 700;
+    }
 
     .service-list {
       display: grid;
@@ -437,7 +471,7 @@
       nav { align-items: flex-start; gap: 16px; flex-direction: column; }
       .nav-links { justify-content: flex-start; }
       .home-view, .book-grid { grid-template-columns: 1fr; }
-      .quick-grid, .menu-grid, .steps-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .quick-grid, .menu-grid, .steps-grid, .testimonial-grid, .contact-grid, .faq-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
       .gallery-card.large { grid-row: auto; }
       h1 { font-size: 50px; }
@@ -549,6 +583,29 @@
             <div class="service-item"><strong>Delivery option</strong>Monday–Thursday delivery available in ZIP code 30519. Suggested $10 delivery fee, or free delivery for orders over $150.</div>
             <div class="service-item"><strong>Small event catering</strong>Suggested $300 minimum for private BBQ service, with final quote based on menu and guest count.</div>
           </div>
+          <div class="limited-note">BBQ is smoked fresh in limited batches. Order early to reserve your spot.</div>
+        </div>
+
+        <div class="contact-box">
+          <h3>Contact & service area</h3>
+          <div class="contact-grid">
+            <div class="contact-card"><strong>Text to order</strong>Text Nick at 404-XXX-XXXX for pickup, delivery, or a custom quote.</div>
+            <div class="contact-card"><strong>Email for events</strong>nicksbbq@example.com</div>
+            <div class="contact-card"><strong>Service area</strong>Serving Buford, GA and nearby areas.</div>
+            <div class="contact-card"><strong>Delivery</strong>Monday–Thursday delivery available in ZIP code 30519 when schedule allows.</div>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <h3>FAQ</h3>
+          <div class="faq-grid">
+            <div class="faq-card"><strong>How much notice do I need?</strong>24–48 hours is recommended because BBQ is smoked fresh and quantities are limited.</div>
+            <div class="faq-card"><strong>Do you deliver?</strong>Yes, Monday–Thursday delivery is available in ZIP code 30519 when the schedule allows.</div>
+            <div class="faq-card"><strong>Do you provide plates and utensils?</strong>For larger packs or events, serving items can be requested and quoted.</div>
+            <div class="faq-card"><strong>Can I customize sides?</strong>Yes. Choose from classic sides like mac & cheese, beans, slaw, potato salad, cornbread, and pickles.</div>
+            <div class="faq-card"><strong>Can you cater larger events?</strong>Yes. Larger events can be quoted based on guest count, meats, sides, and setup needs.</div>
+            <div class="faq-card"><strong>What about allergies?</strong>Food may contain or come in contact with common allergens. Please mention allergies when ordering.</div>
+          </div>
         </div>
       </section>
     </main>
@@ -605,6 +662,7 @@
               <li>Backyard Pack from $175</li>
               <li>24–48 hour notice recommended</li>
               <li>Monday–Thursday delivery available in 30519</li>
+              <li>Serving Buford, GA and nearby areas</li>
             </ul>
 
             <div class="service-box">
@@ -615,6 +673,15 @@
                 <div class="service-item"><strong>Backyard Pack</strong>Starting around $175 for 2 meats, 3 sides, and serving setup.</div>
                 <div class="service-item"><strong>Private BBQ catering</strong>Suggested $300 minimum, final quote based on guest count and menu.</div>
               </div>
+            </div>
+
+            <div class="contact-box">
+              <h3>Contact</h3>
+              <div class="contact-grid">
+                <div class="contact-card"><strong>Text Nick</strong>404-XXX-XXXX</div>
+                <div class="contact-card"><strong>Email</strong>nicksbbq@example.com</div>
+              </div>
+              <div class="limited-note">Order early — BBQ is smoked fresh in limited batches.</div>
             </div>
 
             <div class="payment-box">
