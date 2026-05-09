@@ -152,28 +152,28 @@
 
     .panel h2, .content-panel h2 { font-size: 28px; margin-bottom: 16px; }
 
-    .quick-grid {
+    .quick-grid, .steps-grid, .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       margin-bottom: 18px;
     }
 
-    .quick-card, .menu-card, .gallery-card {
+    .quick-card, .menu-card, .gallery-card, .step-card, .testimonial-card {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 18px;
       padding: 16px;
     }
 
-    .quick-card strong, .menu-card strong {
+    .quick-card strong, .menu-card strong, .step-card strong, .testimonial-card strong {
       display: block;
       color: #ffbf7c;
       font-size: 18px;
       margin-bottom: 5px;
     }
 
-    .quick-card span, .menu-card span { color: #ddd; font-size: 14px; }
+    .quick-card span, .menu-card span, .step-card span, .testimonial-card span { color: #ddd; font-size: 14px; }
 
     .mini-menu { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 18px; margin-top: 10px; }
     .mini-menu h3 { margin-bottom: 10px; color: #fff; }
@@ -239,16 +239,13 @@
       font-size: 13px;
     }
 
-    .service-box {
+    .service-box, .order-ahead-box {
       margin-top: 18px;
       padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,0.14);
     }
 
-    .service-box h3 {
-      color: #ffbf7c;
-      margin-bottom: 10px;
-    }
+    .service-box h3, .order-ahead-box h3 { color: #ffbf7c; margin-bottom: 10px; }
 
     .service-list {
       display: grid;
@@ -269,6 +266,23 @@
       color: #ffbf7c;
       display: block;
       margin-bottom: 4px;
+    }
+
+    .sides-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .side-pill {
+      background: rgba(255,122,34,0.15);
+      color: #ffbf7c;
+      border: 1px solid rgba(255,122,34,0.28);
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .gallery-grid {
@@ -423,7 +437,7 @@
       nav { align-items: flex-start; gap: 16px; flex-direction: column; }
       .nav-links { justify-content: flex-start; }
       .home-view, .book-grid { grid-template-columns: 1fr; }
-      .quick-grid, .menu-grid { grid-template-columns: 1fr; }
+      .quick-grid, .menu-grid, .steps-grid, .testimonial-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
       .gallery-card.large { grid-row: auto; }
       h1 { font-size: 50px; }
@@ -467,18 +481,18 @@
       <aside class="panel">
         <h2>BBQ made simple.</h2>
         <div class="quick-grid">
-          <div class="quick-card"><strong>Smoked meats</strong><span>Brisket, pulled pork, ribs, chicken.</span></div>
+          <div class="quick-card"><strong>Order ahead</strong><span>Fresh smoked BBQ requires 24–48 hours notice.</span></div>
           <div class="quick-card"><strong>Family trays</strong><span>Easy pickup or local delivery.</span></div>
           <div class="quick-card"><strong>Small events</strong><span>Backyards, birthdays, church groups.</span></div>
           <div class="quick-card"><strong>Mon–Thu delivery</strong><span>Local delivery option in 30519.</span></div>
         </div>
         <div class="mini-menu">
-          <h3>Popular choices</h3>
+          <h3>Featured bundles</h3>
           <div class="menu-list">
-            <div><b>Pulled Pork Tray</b><span>from $45</span></div>
-            <div><b>Brisket Plate</b><span>from $22</span></div>
-            <div><b>Rib Rack</b><span>from $32</span></div>
-            <div><b>Family BBQ Pack</b><span>from $85</span></div>
+            <div><b>Family Pack</b><span>from $85</span></div>
+            <div><b>Backyard Pack</b><span>from $175</span></div>
+            <div><b>Event Pack</b><span>custom quote</span></div>
+            <div><b>Classic Sides</b><span>from $12</span></div>
           </div>
         </div>
       </aside>
@@ -494,19 +508,45 @@
           </div>
           <button class="back-btn" onclick="showViewByName('home')">← Back Home</button>
         </div>
+
         <div class="menu-grid">
-          <div class="menu-card"><strong>Pulled Pork Tray</strong><span>Slow-smoked pork, house BBQ sauce, buns optional.</span><em>Great for groups and casual meals.</em><div class="price">Suggested: from $45</div></div>
+          <div class="menu-card"><strong>Family Pack</strong><span>Pulled pork, buns, 2 sides, sauce, and pickles.</span><em>Designed to feed 4–6 people.</em><div class="price">Suggested: from $85</div></div>
+          <div class="menu-card"><strong>Backyard Pack</strong><span>2 meats, 3 sides, buns, sauce, pickles, and serving setup.</span><em>Designed to feed 10–12 people.</em><div class="price">Suggested: from $175</div></div>
+          <div class="menu-card"><strong>Event Pack</strong><span>Custom meat and side selections for larger groups.</span><em>Best for parties and gatherings.</em><div class="price">Custom quote</div></div>
           <div class="menu-card"><strong>Brisket Plate</strong><span>Sliced brisket, pickles, onions, sauce, and one side.</span><em>Premium BBQ favorite.</em><div class="price">Suggested: $22</div></div>
           <div class="menu-card"><strong>Baby Back Ribs</strong><span>Smoked ribs with a sticky glaze or dry rub finish.</span><em>Perfect centerpiece item.</em><div class="price">Suggested: from $32</div></div>
           <div class="menu-card"><strong>Smoked Chicken</strong><span>Juicy smoked chicken with house seasoning and sauce.</span><em>Simple, family-friendly option.</em><div class="price">Suggested: $16</div></div>
-          <div class="menu-card"><strong>Family BBQ Pack</strong><span>Meat, buns, two sides, sauce, pickles, and serving setup.</span><em>Designed to feed 4–6 people.</em><div class="price">Suggested: from $85</div></div>
-          <div class="menu-card"><strong>Classic Sides</strong><span>Mac and cheese, slaw, beans, potato salad, cornbread.</span><em>Add sides to any order.</em><div class="price">Suggested: from $12</div></div>
         </div>
+
         <div class="service-box">
-          <h3>Delivery and event options</h3>
+          <h3>Classic sides</h3>
+          <p style="color:#ddd;">Add sides to any family pack, tray, or catering order.</p>
+          <div class="sides-list">
+            <span class="side-pill">Mac & Cheese</span>
+            <span class="side-pill">Baked Beans</span>
+            <span class="side-pill">Coleslaw</span>
+            <span class="side-pill">Potato Salad</span>
+            <span class="side-pill">Cornbread</span>
+            <span class="side-pill">Pickles</span>
+            <span class="side-pill">Extra BBQ Sauce</span>
+          </div>
+        </div>
+
+        <div class="service-box">
+          <h3>How to order</h3>
+          <div class="steps-grid">
+            <div class="step-card"><strong>1. Choose your meat</strong><span>Pick brisket, pulled pork, ribs, chicken, or a bundle.</span></div>
+            <div class="step-card"><strong>2. Pick your sides</strong><span>Add classic sides and sauces for your group.</span></div>
+            <div class="step-card"><strong>3. Schedule pickup/delivery</strong><span>Monday–Thursday delivery available in ZIP 30519.</span></div>
+            <div class="step-card"><strong>4. Enjoy fresh BBQ</strong><span>Everything is made ahead and served ready for your gathering.</span></div>
+          </div>
+        </div>
+
+        <div class="order-ahead-box">
+          <h3>Order-ahead note</h3>
           <div class="service-list">
-            <div class="service-item"><strong>Monday–Thursday local delivery</strong>Available in ZIP code 30519 for smaller BBQ orders when the schedule allows.</div>
-            <div class="service-item"><strong>Suggested delivery fee</strong>$10 within 30519, or free delivery for orders over $150.</div>
+            <div class="service-item"><strong>Fresh smoked BBQ takes time</strong>Orders are limited and scheduled in advance. Please allow 24–48 hours notice when possible.</div>
+            <div class="service-item"><strong>Delivery option</strong>Monday–Thursday delivery available in ZIP code 30519. Suggested $10 delivery fee, or free delivery for orders over $150.</div>
             <div class="service-item"><strong>Small event catering</strong>Suggested $300 minimum for private BBQ service, with final quote based on menu and guest count.</div>
           </div>
         </div>
@@ -530,6 +570,16 @@
           <div class="gallery-card g4"><div class="gallery-label">Family trays</div></div>
           <div class="gallery-card g5"><div class="gallery-label">Sauce & sides</div></div>
         </div>
+
+        <div class="service-box">
+          <h3>What people are saying</h3>
+          <div class="testimonial-grid">
+            <div class="testimonial-card"><strong>“Perfect for our family night.”</strong><span>The food felt homemade, fresh, and easy to serve.</span></div>
+            <div class="testimonial-card"><strong>“The brisket was the favorite.”</strong><span>Great flavor, tender meat, and the sides disappeared fast.</span></div>
+            <div class="testimonial-card"><strong>“So much better than takeout.”</strong><span>It felt like a real backyard BBQ without all the work.</span></div>
+            <div class="testimonial-card"><strong>“Easy ordering and pickup.”</strong><span>Everything was packed well and ready on time.</span></div>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -551,8 +601,9 @@
               <li>Family dinners and backyard nights</li>
               <li>Birthdays and small events</li>
               <li>Church, homeschool, or team meals</li>
-              <li>Suggested plates: $16–$22 each</li>
-              <li>Family packs from $85</li>
+              <li>Family Pack from $85</li>
+              <li>Backyard Pack from $175</li>
+              <li>24–48 hour notice recommended</li>
               <li>Monday–Thursday delivery available in 30519</li>
             </ul>
 
@@ -560,8 +611,8 @@
               <h3>Suggested pricing</h3>
               <div class="service-list">
                 <div class="service-item"><strong>Individual plates</strong>$16–$22 each depending on meat and sides.</div>
-                <div class="service-item"><strong>Family packs</strong>Starting around $85 for meat, sides, sauce, and buns.</div>
-                <div class="service-item"><strong>Small delivery orders</strong>Monday–Thursday in ZIP 30519. Suggested $10 delivery fee, or free over $150.</div>
+                <div class="service-item"><strong>Family Pack</strong>Starting around $85 for meat, sides, sauce, and buns.</div>
+                <div class="service-item"><strong>Backyard Pack</strong>Starting around $175 for 2 meats, 3 sides, and serving setup.</div>
                 <div class="service-item"><strong>Private BBQ catering</strong>Suggested $300 minimum, final quote based on guest count and menu.</div>
               </div>
             </div>
@@ -569,19 +620,16 @@
             <div class="payment-box">
               <h3>Secure payment options</h3>
               <p>Reserve your date with a deposit or pay your order balance through a trusted provider.</p>
-
               <div class="payment-options">
                 <a class="pay-link" href="https://buy.stripe.com/test_123456789" target="_blank">Pay deposit with Stripe <span>Secure checkout →</span></a>
                 <a class="pay-link" href="https://square.link/u/example" target="_blank">Pay with Square <span>Card / Apple Pay →</span></a>
                 <a class="pay-link" href="https://www.paypal.me/yourname" target="_blank">Pay with PayPal <span>PayPal / card →</span></a>
               </div>
-
               <div class="qr-card">
                 <strong>Scan to order or book</strong>
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://yourusername.github.io/nicks-bbq/" alt="QR code for Nick's BBQ website">
                 <small>Replace this QR link with your real GitHub Pages or payment link.</small>
               </div>
-
               <p class="security-note">For safety, this site should not collect credit card numbers directly. Use Stripe, Square, PayPal, or another trusted payment processor.</p>
             </div>
           </div>
@@ -603,10 +651,11 @@
               <option>Monday–Thursday delivery in 30519</option>
               <option>Pickup order</option>
               <option>Family BBQ pack</option>
+              <option>Backyard Pack</option>
               <option>Small event catering</option>
               <option>Custom quote</option>
             </select>
-            <textarea placeholder="Tell us about your event, preferred meats, sides, location, and serving time..."></textarea>
+            <textarea placeholder="Tell us about your event, preferred meats, sides, location, delivery/pickup needs, and serving time..."></textarea>
             <button class="btn btn-primary" type="submit">Send BBQ Request</button>
           </form>
         </div>
@@ -615,7 +664,7 @@
 
     <div class="footer-note">
       <span>© 2026 Nick's BBQ • Slow smoked, made fresh.</span>
-      <span class="badge">One-file mockup • Home, Menu, Gallery, and Book inside this page</span>
+      <span class="badge">Dark theme mockup • Bundles, sides, ordering steps, payments, and QR included</span>
     </div>
   </div>
 
